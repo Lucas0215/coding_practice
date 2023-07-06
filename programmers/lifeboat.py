@@ -23,15 +23,13 @@ people	            limit	return
 def solution(people, limit):
     answer = 0
     people.sort(reverse=True)
-    rescue = [False for person in people]
     
     light = len(people) - 1
     for i in range(len(people)):
-        if rescue[i]: continue
+        if light < i:
+            break
         if people[i] + people[light] <= limit:
-            rescue[light] = True
             light -= 1
-        rescue[i] = True
         answer += 1
         
     return answer
