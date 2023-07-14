@@ -12,19 +12,14 @@ prices	        return
 '''
 
 def solution(prices):
-    answer = []
-    prices.reverse()
+    stack = []
+    answer = [0]*len(prices)
     
-    for i, price in enumerate(prices):
-        period = 0
-        add = False
-        for j in range(i):
-            period += 1
-            if prices[i-j-1] < price:
-                answer.append(period)
-                add = True
-                break
-        if not add:
-            answer.append(period)
-
-    return answer[::-1]
+    for i in range(len(prices)):
+        while stack != [] and stack[-1][1] > prices[i]:
+            past, _ = stack.pop()
+            answer[past] = i-past
+        stack.append([i, prices[i]])
+    for i, _ in stack:
+        answer[i] = len(prices)-i-1
+    return answer
