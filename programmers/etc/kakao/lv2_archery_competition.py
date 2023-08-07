@@ -64,6 +64,13 @@ def solution(n, info):
             if dif > max_dif:
                 max_dif = dif
                 max_queue = q
+            elif dif == max_dif != 0:
+                for i in range(11):
+                    if max_queue[10-i] < q[10-i]:
+                        max_queue = q
+                        break
+                    elif max_queue[10-i] > q[10-i]:
+                        break
     return max_queue
 
 def judge(ryan, apeach):
